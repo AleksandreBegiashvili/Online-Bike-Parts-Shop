@@ -29,6 +29,8 @@ namespace RabidBike.API.Controllers
             _roleManager = roleManager;
         }
 
+        #region Register
+
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterRequestModel model)
@@ -45,6 +47,11 @@ namespace RabidBike.API.Controllers
 
             return result != null ? (IActionResult)Ok(result) : BadRequest();
         }
+
+        #endregion
+
+
+        #region Login
 
         [HttpPost("Login")]
         [AllowAnonymous]
@@ -67,8 +74,40 @@ namespace RabidBike.API.Controllers
 
         }
 
+        #endregion
 
 
+
+
+
+
+
+        #region CreateRole
+
+        //[HttpPost("CreateRole")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> CreateRole([FromBody] roleviewmodel model)
+        //{
+        //    var role = model.RoleName;
+        //    bool roleExists = await _roleManager.RoleExistsAsync(role);
+
+        //    if (!roleExists)
+        //    {
+        //        await _roleManager.CreateAsync(new IdentityRole(role));
+        //        return Ok($"Role {role} was successfuly created.");
+        //    }
+        //    else
+        //    {
+        //        return BadRequest($"Role {role} already exists in the database.");
+        //    }
+        //}
+
+        //public class roleviewmodel
+        //{
+        //    public string RoleName { get; set; }
+        //}
+
+        #endregion
     }
 }
 
@@ -90,26 +129,6 @@ namespace RabidBike.API.Controllers
 
 
 
-/*
-[HttpPost("CreateRole")]
-public async Task<IActionResult> CreateRole([FromBody] roleviewmodel model)
-{
-    var role = model.RoleName;
-    bool roleExists = await _roleManager.RoleExistsAsync(role);
 
-    if (!roleExists)
-    {
-        await _roleManager.CreateAsync(new IdentityRole(role));
-        return Ok($"Role {role} was successfuly created.");
-    }
-    else
-    {
-        return BadRequest($"Role {role} already exists in the database.");
-    }
-}
 
-public class roleviewmodel
-{
-    public string RoleName { get; set; }
-}
-*/
+

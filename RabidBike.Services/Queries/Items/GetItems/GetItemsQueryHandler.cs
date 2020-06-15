@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RabidBike.Services.Queries.Items.GetItems
 {
-    public class GetItemsQueryHandler : IRequestHandler<GetItemsQuery, IEnumerable<ItemsResponse>>
+    public class GetItemsQueryHandler : IRequestHandler<GetItemsQuery, (int, IEnumerable<ItemsResponse>)>
     {
 
         private readonly IItemRepository _itemRepository;
@@ -24,9 +24,12 @@ namespace RabidBike.Services.Queries.Items.GetItems
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ItemsResponse>> Handle(GetItemsQuery request, CancellationToken cancellationToken)
+        public async Task<(int, IEnumerable<ItemsResponse>)> Handle(GetItemsQuery request, CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<ItemsResponse>>(await _itemRepository.GetItems(request.ItemParameters)); 
+            var items = await _itemRepository.GetItems(request.ItemParameters);
+            int totalItems = items.TotalCount;
+            var result = _mapper.Map<IEnumerable<ItemsResponse>>(items);
+            return (totalItems, result);
         }
     }
 }

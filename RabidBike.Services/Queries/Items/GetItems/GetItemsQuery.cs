@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RabidBike.Services.Queries.Items.GetItems
 {
-    public class GetItemsQuery : IRequest<IEnumerable<ItemsResponse>>
+    public class GetItemsQuery : IRequest<(int, IEnumerable<ItemsResponse>)>
     {
         public GetItemsQuery(ItemParameters itemParameters)
         {

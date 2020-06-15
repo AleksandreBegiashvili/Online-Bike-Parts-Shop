@@ -51,7 +51,11 @@ namespace RabidBike.Data.Implementations
 
         public async Task<PagedList<Item>> GetItems(ItemParameters itemParameters)
         {
-            IQueryable<Item> items = _itemRepositoryObject.Table;
+            IQueryable<Item> items = _itemRepositoryObject.Table
+                .Include(i => i.Category)
+                .Include(i => i.Condition)
+                .Include(i => i.Location)
+                .Include(i => i.Seller);
             SearchByName(ref items, itemParameters.Name);
 
             return await PagedList<Item>.ToPagedList(items, itemParameters.PageNumber, itemParameters.PageSize);

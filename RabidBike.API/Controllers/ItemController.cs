@@ -62,9 +62,10 @@ namespace RabidBike.API.Controllers
         {
             var query = new GetItemsQuery(itemParameters);
             var queryResult = await _mediator.Send(query);
-            var result = _mapper.Map<IEnumerable<ItemsListResponse>>(queryResult);
+            int totalCount = queryResult.Item1;
+            var items = _mapper.Map<IEnumerable<ItemsListResponse>>(queryResult.Item2);
 
-            return Ok(result);
+            return Ok(new { totalCount, items });
         }
 
         #endregion
