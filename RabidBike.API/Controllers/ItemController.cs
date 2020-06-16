@@ -17,6 +17,7 @@ using RabidBike.Data.Models;
 using RabidBike.Services.Commands.Items.CreateItem;
 using RabidBike.Services.Commands.Items.DeleteItem;
 using RabidBike.Services.Commands.Items.UpdateItem;
+using RabidBike.Services.Queries.Items.GetItemById;
 using RabidBike.Services.Queries.Items.GetItems;
 using RabidBike.Services.Queries.Items.GetItemsByCategory;
 using RabidBike.Services.Queries.Items.UserOwnsItem;
@@ -87,6 +88,22 @@ namespace RabidBike.API.Controllers
         #endregion
 
 
+        #region GetById
+
+        [HttpGet("GetById/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var query = new GetItemByIdQuery(id);
+            var queryResult = await _mediator.Send(query);
+            var result = _mapper.Map<ItemResponse>(queryResult);
+
+            return Ok(result);
+        }
+
+        #endregion
+
+
         #region Create Item
 
         [HttpPost("CreateItem")]
@@ -109,7 +126,7 @@ namespace RabidBike.API.Controllers
 
         [HttpPut("UpdateItem")]
         [Authorize(Policy = "RequireUser")]
-        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        //[ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> UpdateItem([FromBody] UpdateItemRequestModel model)
         {
 
@@ -127,7 +144,7 @@ namespace RabidBike.API.Controllers
                 return NotFound();
             }
 
-            return Ok($"{result.Message} Item id: {model.Id}");
+            return Ok();
         }
 
         #endregion

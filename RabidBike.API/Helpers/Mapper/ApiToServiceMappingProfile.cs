@@ -31,6 +31,7 @@ namespace RabidBike.API.Helpers.Mapper
                  .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.Category.CategoryName));
             CreateMap<ItemsByCategoryResponse, ItemsListByCategoryResponse>().ReverseMap();
             CreateMap<CreateItemRequestModel, CreateItemCommand>().ReverseMap();
+            CreateMap<ItemResponse, GetItemByIdQueryResponse>().ReverseMap();
 
             CreateMap<UpdateItemRequestModel, GetItemByIdQueryResponse>().ReverseMap();
             CreateMap<UpdateItemRequestModel, UpdateItemCommand>().ReverseMap();
