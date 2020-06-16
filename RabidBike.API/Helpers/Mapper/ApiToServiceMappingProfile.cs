@@ -24,6 +24,11 @@ namespace RabidBike.API.Helpers.Mapper
         public ApiToServiceMappingProfile()
         {
             CreateMap<ItemsResponse, ItemsListResponse>().ReverseMap();
+            CreateMap<Item, ItemsListResponse>()
+                 .ForMember(dest => dest.Condition, opts => opts.MapFrom(src => src.Condition.Name))
+                 .ForMember(dest => dest.Location, opts => opts.MapFrom(src => src.Location.City))
+                 .ForMember(dest => dest.Seller, opts => opts.MapFrom(src => src.Seller.UserName))
+                 .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.Category.CategoryName));
             CreateMap<ItemsByCategoryResponse, ItemsListByCategoryResponse>().ReverseMap();
             CreateMap<CreateItemRequestModel, CreateItemCommand>().ReverseMap();
 

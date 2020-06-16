@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using AutoMapper;
 using RabidBike.API.Models.Response;
+using System.Collections.Generic;
+using RabidBike.Domain.Entities;
 
 namespace RabidBike.API.Controllers
 {
@@ -29,15 +31,14 @@ namespace RabidBike.API.Controllers
         [HttpGet("GetItemsBySeller")]
         public async Task<IActionResult> GetItemsBySeller()
         {
-            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-            var items = user.Items;
-
+            var user = await _userManager.FindByIdWithRelatedDataAsync(HttpContext.GetUserId());
+            IEnumerable<Item> items = user.Items;
             if(items == null)
             {
                 return NoContent();
             }
-
-            return Ok(items);
+            var result = _mapper.Map<IEnumerable<ItemsListResponse>>(items);
+            return Ok(result);
         }
 
         // Get specific user details

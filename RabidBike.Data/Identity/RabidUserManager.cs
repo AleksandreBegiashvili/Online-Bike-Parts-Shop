@@ -27,6 +27,11 @@ namespace RabidBike.Data.Identity
         {
             return await Users
                             .Include(u => u.Items)
+                                .ThenInclude(i => i.Condition)
+                             .Include(u => u.Items)
+                                .ThenInclude(i => i.Location)
+                             .Include(u => u.Items)
+                                .ThenInclude(i => i.Seller)
                             .Where(u => u.Id == userId)
                             .SingleAsync();
         }
