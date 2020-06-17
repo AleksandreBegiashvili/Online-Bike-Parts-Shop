@@ -20,7 +20,12 @@ namespace RabidBike.Services.Helpers.Mapper
                  .ForMember(dest => dest.Location, opts => opts.MapFrom(src => src.Location.City))
                  .ForMember(dest => dest.Seller, opts => opts.MapFrom(src => src.Seller.UserName))
                  .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.Category.CategoryName));
-            CreateMap<Item, ItemsByCategoryResponse>().ReverseMap();
+
+            CreateMap<Item, ItemsByCategoryResponse>()
+                 .ForMember(dest => dest.Condition, opts => opts.MapFrom(src => src.Condition.Name))
+                 .ForMember(dest => dest.Location, opts => opts.MapFrom(src => src.Location.City))
+                 .ForMember(dest => dest.Seller, opts => opts.MapFrom(src => src.Seller.UserName))
+                 .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.Category.CategoryName));
             CreateMap<Item, CreateItemCommand>().ReverseMap();
             CreateMap<Item, CreateItemCommandResponse>().ReverseMap();
             CreateMap<Item, GetItemByIdQueryResponse>().ReverseMap();

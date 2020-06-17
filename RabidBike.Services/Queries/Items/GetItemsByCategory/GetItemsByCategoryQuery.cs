@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace RabidBike.Services.Queries.Items.GetItemsByCategory
 {
-    public class GetItemsByCategoryQuery : IRequest<IEnumerable<ItemsByCategoryResponse>>
+    public class GetItemsByCategoryQuery : IRequest<(int, IEnumerable<ItemsByCategoryResponse>)>
     {
 
         public GetItemsByCategoryQuery(int categoryId, ItemParameters itemParameters)

@@ -26,9 +26,9 @@ namespace RabidBike.Services.Queries.Items.GetItems
 
         public async Task<(int, IEnumerable<ItemsResponse>)> Handle(GetItemsQuery request, CancellationToken cancellationToken)
         {
-            var items = await _itemRepository.GetItems(request.ItemParameters);
+            PagedList<Item> items = await _itemRepository.GetItems(request.ItemParameters);
             int totalItems = items.TotalCount;
-            var result = _mapper.Map<IEnumerable<ItemsResponse>>(items);
+            IEnumerable<ItemsResponse> result = _mapper.Map<IEnumerable<ItemsResponse>>(items);
             return (totalItems, result);
         }
     }

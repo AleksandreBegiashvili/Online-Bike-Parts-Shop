@@ -61,10 +61,10 @@ namespace RabidBike.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAll([FromQuery] ItemParameters itemParameters)
         {
-            var query = new GetItemsQuery(itemParameters);
-            var queryResult = await _mediator.Send(query);
+            GetItemsQuery query = new GetItemsQuery(itemParameters);
+            (int, IEnumerable<ItemsResponse>) queryResult = await _mediator.Send(query);
             int totalCount = queryResult.Item1;
-            var items = _mapper.Map<IEnumerable<ItemsListResponse>>(queryResult.Item2);
+            IEnumerable<ItemsListResponse> items = _mapper.Map<IEnumerable<ItemsListResponse>>(queryResult.Item2);
 
             return Ok(new { totalCount, items });
         }
@@ -78,11 +78,12 @@ namespace RabidBike.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAllByCategoryId([FromQuery] int categoryId, [FromQuery] ItemParameters itemParameters)
         {
-            var query = new GetItemsByCategoryQuery(categoryId, itemParameters);
-            var queryResult = await _mediator.Send(query);
-            var result = _mapper.Map<IEnumerable<ItemsListByCategoryResponse>>(queryResult);
+            GetItemsByCategoryQuery query = new GetItemsByCategoryQuery(categoryId, itemParameters);
+            (int, IEnumerable<ItemsByCategoryResponse>) queryResult = await _mediator.Send(query);
+            int totalCount = queryResult.Item1;
+            IEnumerable<ItemsListByCategoryResponse> items = _mapper.Map<IEnumerable<ItemsListByCategoryResponse>>(queryResult.Item2);
 
-            return Ok(result);
+            return Ok(new { totalCount, items });
         }
 
         #endregion
