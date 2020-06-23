@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RabidBike.Data.Models
+namespace RabidBike.Common.Models
 {
     public class QueryStringParameters
     {

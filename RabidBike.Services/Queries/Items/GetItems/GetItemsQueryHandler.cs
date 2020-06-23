@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using RabidBike.Data.Abstractions;
-using RabidBike.Data.Models;
+using RabidBike.Common.Models;
 using RabidBike.Domain.Entities;
 using System;
 using System.Collections.Generic;

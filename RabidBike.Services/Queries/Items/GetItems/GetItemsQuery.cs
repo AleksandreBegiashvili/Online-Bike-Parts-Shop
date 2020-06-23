@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RabidBike.Data.Models;
+using RabidBike.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

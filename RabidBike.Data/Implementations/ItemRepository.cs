@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RabidBike.Data.Abstractions;
-using RabidBike.Data.Models;
+using RabidBike.Common.Models;
 using RabidBike.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +76,20 @@ namespace RabidBike.Data.Implementations
 
             return await PagedList<Item>.ToPagedList(items, itemParameters.PageNumber, itemParameters.PageSize);
 
+        }
+
+        #endregion
+
+        #region GetItemsByUser Async, Paged
+
+        public async Task<PagedList<Item>> GetItemsByUser(string userId, QueryStringParameters pagingParams)
+        {
+            IQueryable<Item> items = _itemRepositoryObject.Table.Where(i => i.SellerId.Equals(userId))
+                .Include(i => i.Category)
+                .Include(i => i.Condition)
+                .Include(i => i.Location)
+                .Include(i => i.Seller);
+            return await PagedList<Item>.ToPagedList(items, pagingParams.PageNumber, pagingParams.PageSize);
         }
 
         #endregion

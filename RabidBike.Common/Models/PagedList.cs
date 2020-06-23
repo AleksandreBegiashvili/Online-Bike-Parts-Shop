@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RabidBike.Data.Models
+namespace RabidBike.Common.Models
 {
     public class PagedList<T> : List<T>
     {

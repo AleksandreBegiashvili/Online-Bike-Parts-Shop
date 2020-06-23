@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RabidBike.Common\RabidBike.Common.csproj" />
     <ProjectReference Include="..\RabidBike.Domain\RabidBike.Domain.csproj" />
   </ItemGroup>
 

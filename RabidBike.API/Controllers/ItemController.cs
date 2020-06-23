@@ -13,7 +13,7 @@ using RabidBike.API.Extensions;
 using RabidBike.API.Models.Request;
 using RabidBike.API.Models.Response;
 using RabidBike.Data.Identity;
-using RabidBike.Data.Models;
+using RabidBike.Common.Models;
 using RabidBike.Services.Commands.Items.CreateItem;
 using RabidBike.Services.Commands.Items.DeleteItem;
 using RabidBike.Services.Commands.Items.UpdateItem;

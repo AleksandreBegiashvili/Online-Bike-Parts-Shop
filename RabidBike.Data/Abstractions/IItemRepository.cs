@@ -1,4 +1,4 @@
-﻿using RabidBike.Data.Models;
+﻿using RabidBike.Common.Models;
 using RabidBike.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,6 +12,7 @@ namespace RabidBike.Data.Abstractions
 
         Task<PagedList<Item>> GetItems(ItemParameters itemParameters);
         Task<PagedList<Item>> GetItemsByCategoryId(int categoryId, ItemParameters itemParameters);
+        Task<PagedList<Item>> GetItemsByUser(string userId, QueryStringParameters queryParams);
 
         Task Insert(Item item);
 
