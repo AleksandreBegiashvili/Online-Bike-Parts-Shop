@@ -9,6 +9,9 @@ using AutoMapper;
 using RabidBike.API.Models.Response;
 using System.Collections.Generic;
 using RabidBike.Domain.Entities;
+using RabidBike.Common.Models;
+using RabidBike.Services.Queries.Items.GetItemsByUser;
+using MediatR;
 
 namespace RabidBike.API.Controllers
 {
@@ -19,26 +22,26 @@ namespace RabidBike.API.Controllers
     {
         private readonly RabidUserManager _userManager;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
         public DashboardController(RabidUserManager userManager,
-                                    IMapper mapper)
+                                    IMapper mapper,
+                                    IMediator mediator)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _mediator = mediator;
         }
 
         // Get items by specific user id
         [HttpGet("GetItemsBySeller")]
-        public async Task<IActionResult> GetItemsBySeller()
+        public async Task<IActionResult> GetItemsBySeller([FromQuery] QueryStringParameters queryParams)
         {
-            var user = await _userManager.FindByIdWithRelatedDataAsync(HttpContext.GetUserId());
-            IEnumerable<Item> items = user.Items;
-            if(items == null)
-            {
-                return NoContent();
-            }
-            var result = _mapper.Map<IEnumerable<ItemsListResponse>>(items);
-            return Ok(result);
+            GetItemsByUserQuery query = new GetItemsByUserQuery(HttpContext.GetUserId(), queryParams);
+            (int, IEnumerable<ItemsByUserResponse>) queryResult = await _mediator.Send(query);
+            int totalCount = queryResult.Item1;
+            IEnumerable<ItemsListResponse> items = _mapper.Map<IEnumerable<ItemsListResponse>>(queryResult.Item2);
+            return Ok(new { totalCount, items });
         }
 
         // Get specific user details

@@ -11,6 +11,7 @@ using RabidBike.Services.Queries.Conditions.GetConditions;
 using RabidBike.Services.Queries.Items.GetItemById;
 using RabidBike.Services.Queries.Items.GetItems;
 using RabidBike.Services.Queries.Items.GetItemsByCategory;
+using RabidBike.Services.Queries.Items.GetItemsByUser;
 using RabidBike.Services.Queries.Locations.GetLocations;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace RabidBike.API.Helpers.Mapper
             CreateMap<ItemsByCategoryResponse, ItemsListByCategoryResponse>().ReverseMap();
             CreateMap<CreateItemRequestModel, CreateItemCommand>().ReverseMap();
             CreateMap<ItemResponse, GetItemByIdQueryResponse>().ReverseMap();
+            CreateMap<ItemsByUserResponse, ItemsListResponse>().ReverseMap();
 
             CreateMap<UpdateItemRequestModel, GetItemByIdQueryResponse>().ReverseMap();
             CreateMap<UpdateItemRequestModel, UpdateItemCommand>().ReverseMap();

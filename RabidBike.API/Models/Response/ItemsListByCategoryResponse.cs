@@ -16,5 +16,15 @@ namespace RabidBike.API.Models.Response
         public DateTime ListDate { get; set; }
 
         public int CategoryId { get; set; }
+        public string Category { get; set; }
+
+        //public int ConditionId { get; set; }
+        public string Condition { get; set; }
+
+        //public int LocationId { get; set; }
+        public string Location { get; set; }
+
+        //public string SellerId { get; set; }
+        public string Seller { get; set; }
     }
 }
