@@ -282,8 +282,8 @@ namespace RabidBike.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<string>("SellerId")
                         .HasColumnType("nvarchar(450)");
@@ -388,9 +388,10 @@ namespace RabidBike.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("RabidBike.Domain.Entities.ApplicationUser", "Seller")
-                        .WithMany()
+                        .WithMany("Items")
                         .HasForeignKey("SellerId");
                 });
+
 #pragma warning restore 612, 618
         }
     }
