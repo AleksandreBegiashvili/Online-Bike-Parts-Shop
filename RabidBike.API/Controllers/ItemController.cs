@@ -42,9 +42,8 @@ namespace RabidBike.API.Controllers
 
         #region Ctor
 
-        public ItemController(IMediator mediator,
-                                IMapper mapper,
-                                RabidUserManager userManager)
+        public ItemController(IMediator mediator, IMapper mapper,
+            RabidUserManager userManager)
         {
             _mediator = mediator;
             _mapper = mapper;
