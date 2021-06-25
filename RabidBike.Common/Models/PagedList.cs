@@ -20,7 +20,7 @@ namespace RabidBike.Common.Models
         public PagedList(List<T> items, int count, int pageNumber, int pageSize)
         {
             TotalCount = count;
-            PageSize = PageSize;
+            PageSize = pageSize;
             CurrentPage = pageNumber;
             TotalPages = (int)Math.Ceiling(count / (double)PageSize);
 
